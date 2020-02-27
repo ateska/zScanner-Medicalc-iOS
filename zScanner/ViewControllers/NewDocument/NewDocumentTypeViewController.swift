@@ -122,32 +122,46 @@ class NewDocumentTypeViewController: BaseViewController {
 
 // MARK: - UITableViewDataSource implementation
 extension NewDocumentTypeViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.fields.count
+        if section == 0 {
+            return viewModel.fields.count
+        } else {
+            return viewModel.documentTypes.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = viewModel.fields[indexPath.row]
-        
-        switch item {
-        case let list as ListPickerField<DocumentTypeDomainModel>:
+        if indexPath.section == 0 {
+            print(indexPath.row)
+            let item = viewModel.fields[indexPath.row]
+            
+            switch item {
+            case let text as TextInputField:
+                let cell = tableView.dequeueCell(TextInputTableViewCell.self)
+                cell.setup(with: text)
+                return cell
+            case let date as DateTimePickerField:
+                let cell = tableView.dequeueCell(FormFieldTableViewCell.self)
+                cell.setup(with: date)
+                return cell
+            case let datePicker as DateTimePickerPlaceholder:
+                let cell = tableView.dequeueCell(DateTimePickerTableViewCell.self)
+                cell.setup(with: datePicker)
+                return cell
+            default:
+                return UITableViewCell()
+            }
+        } else {
+            let item = viewModel.documentTypes[indexPath.row]
+            
+            let list = item as! ListPickerField<DocumentSubTypeDomainModel>
             let cell = tableView.dequeueCell(FormFieldTableViewCell.self)
             cell.setup(with: list)
             return cell
-        case let text as TextInputField:
-            let cell = tableView.dequeueCell(TextInputTableViewCell.self)
-            cell.setup(with: text)
-            return cell
-        case let date as DateTimePickerField:
-            let cell = tableView.dequeueCell(FormFieldTableViewCell.self)
-            cell.setup(with: date)
-            return cell
-        case let datePicker as DateTimePickerPlaceholder:
-            let cell = tableView.dequeueCell(DateTimePickerTableViewCell.self)
-            cell.setup(with: datePicker)
-            return cell
-        default:
-            return UITableViewCell()
         }
     }
 }
@@ -155,7 +169,7 @@ extension NewDocumentTypeViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate implementation
 extension NewDocumentTypeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = viewModel.fields[indexPath.row]
+        let item = viewModel.documentTypes[indexPath.row]
         
         // Hide picker if user select different cell
         if self.pickerIndexPath != nil && !(item is DateTimePickerField) {
@@ -166,7 +180,7 @@ extension NewDocumentTypeViewController: UITableViewDelegate {
         tableView.visibleCells.forEach({ ($0 as? TextInputTableViewCell)?.enableSelection() })
         
         switch item {
-        case let list as ListPickerField<DocumentTypeDomainModel>:
+        case let list as ListPickerField<DocumentSubTypeDomainModel>:
             coordinator.showSelector(for: list)
         case let date as DateTimePickerField:
             if pickerIndexPath == nil {

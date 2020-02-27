@@ -204,9 +204,9 @@ extension NewDocumentCoordinator: NewDocumentTypeCoordinator {
                 if let date = datePicker.date.value {
                     newDocument.date = date
                 }
-            case let listPicker as ListPickerField<DocumentTypeDomainModel>:
+            case let listPicker as ListPickerField<DocumentSubTypeDomainModel>:
                 if let type = listPicker.selected.value {
-                    newDocument.type = type
+                    newDocument.type.subtypes = [type]
                 }
             default:
                 break
