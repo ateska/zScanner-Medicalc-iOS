@@ -118,6 +118,8 @@ class NewDocumentTypeViewController: BaseViewController {
         button.setTitle("newDocumentType.button.title".localized, for: .normal)
         return button
     }()
+    
+    private lazy var documentTypesHeaderView = TitleView(title: "form.listPicker.title".localized)
 }
 
 // MARK: - UITableViewDataSource implementation
@@ -167,6 +169,22 @@ extension NewDocumentTypeViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate implementation
 extension NewDocumentTypeViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 1 ? tableView.rowHeight : 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return section == 1 ? documentTypesHeaderView : nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 0 ? 20 : 0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             let item = viewModel.fields[indexPath.row]
@@ -198,7 +216,7 @@ extension NewDocumentTypeViewController: UITableViewDelegate {
             
         } else {
             let item = viewModel.documentTypes[indexPath.row]
-                
+        
             let list = item as! ListPickerField<DocumentSubTypeDomainModel>
             coordinator.showSelector(for: list)
         }
