@@ -28,7 +28,8 @@ extension DocumentTypeNetworkModel {
     func toDomainModel() -> DocumentTypeDomainModel {
         return DocumentTypeDomainModel(
             id: id,
-            name: display
+            name: display,
+            subtypes: subtypes?.map({ DocumentSubTypeDomainModel(id: $0.id, name: $0.display) }) ?? []
         )
     }
 }

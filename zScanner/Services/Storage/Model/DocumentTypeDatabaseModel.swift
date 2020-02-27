@@ -12,12 +12,15 @@ import RealmSwift
 class DocumentTypeDatabaseModel: Object {
     @objc dynamic var id = ""
     @objc dynamic var name = ""
+    let subtypes = List<DocumentSubTypeDatabaseModel>()
     
     convenience init(documentType: DocumentTypeDomainModel) {
         self.init()
         
         self.id = documentType.id
         self.name = documentType.name
+        
+        self.subtypes.append(objectsIn: documentType.subtypes.map({ DocumentSubTypeDatabaseModel(documentSubType: $0) }))
     }
     
     override class func primaryKey() -> String {
@@ -30,7 +33,8 @@ extension DocumentTypeDatabaseModel {
     func toDomainModel() -> DocumentTypeDomainModel {
         return DocumentTypeDomainModel(
             id: id,
-            name: name
+            name: name,
+            subtypes: subtypes.map({ $0.toDomainModel() })
         )
     }
 }

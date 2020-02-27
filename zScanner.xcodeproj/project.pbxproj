@@ -11,6 +11,7 @@
 		16A2CAC523F70CDB006E9577 /* DepartmentsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A2CAC423F70CDB006E9577 /* DepartmentsRequest.swift */; };
 		16A2CAC723F70E2F006E9577 /* DepartmentDomainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A2CAC623F70E2F006E9577 /* DepartmentDomainModel.swift */; };
 		16A2CAC923F71091006E9577 /* DepartmentDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A2CAC823F71091006E9577 /* DepartmentDatabaseModel.swift */; };
+		16B3438B2407DE270085E387 /* DocumentSubTypeDatabaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B3438A2407DE270085E387 /* DocumentSubTypeDatabaseModel.swift */; };
 		16B8D4BD23F7035D003DFD71 /* GetFolderRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B8D4BC23F7035D003DFD71 /* GetFolderRequest.swift */; };
 		16DD55DC2406A1C30096BBEB /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD55DB2406A1C30096BBEB /* TitleView.swift */; };
 		16DD55DE2406F3D40096BBEB /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16DD55DD2406F3D40096BBEB /* ErrorView.swift */; };
@@ -154,6 +155,7 @@
 		16A2CAC423F70CDB006E9577 /* DepartmentsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentsRequest.swift; sourceTree = "<group>"; };
 		16A2CAC623F70E2F006E9577 /* DepartmentDomainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentDomainModel.swift; sourceTree = "<group>"; };
 		16A2CAC823F71091006E9577 /* DepartmentDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepartmentDatabaseModel.swift; sourceTree = "<group>"; };
+		16B3438A2407DE270085E387 /* DocumentSubTypeDatabaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSubTypeDatabaseModel.swift; sourceTree = "<group>"; };
 		16B8D4BC23F7035D003DFD71 /* GetFolderRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFolderRequest.swift; sourceTree = "<group>"; };
 		16DD55DB2406A1C30096BBEB /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		16DD55DD2406F3D40096BBEB /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -639,6 +641,7 @@
 				16A2CAC823F71091006E9577 /* DepartmentDatabaseModel.swift */,
 				BDFC478422E907F200F312F0 /* DocumentDatabaseModel.swift */,
 				BD2B9E8722EDF0C900FFCD3B /* DocumentTypeDatabaseModel.swift */,
+				16B3438A2407DE270085E387 /* DocumentSubTypeDatabaseModel.swift */,
 				BD44E279232703BC00A0B9E5 /* DocumentUploadStatusDatabaseModel.swift */,
 				BD8AA80E23003D530082441F /* FolderDatabaseModel.swift */,
 				BDBF4E20232EED4C0078BF53 /* LoginDatabaseModel.swift */,
@@ -1006,6 +1009,7 @@
 				BD402E7B2300D60B00049DF9 /* FolderTableViewCell.swift in Sources */,
 				43C14A122300F07E00F7C24E /* DrawerViewController.swift in Sources */,
 				16B8D4BD23F7035D003DFD71 /* GetFolderRequest.swift in Sources */,
+				16B3438B2407DE270085E387 /* DocumentSubTypeDatabaseModel.swift in Sources */,
 				BDA25B2322EF9D7A006DA7E4 /* FirebaseAnalytics.swift in Sources */,
 				BD2F209422EBB49000534916 /* DocumentsCoordinator.swift in Sources */,
 				BD59A06C22E36D2A00FA9CD0 /* ViewControllerService.swift in Sources */,

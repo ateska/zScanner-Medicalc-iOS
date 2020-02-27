@@ -9,9 +9,15 @@
 import Foundation
 
 // MARK: -
+struct DocumentSubTypeDomainModel {
+    var id: String
+    var name: String
+}
+
 struct DocumentTypeDomainModel {
     var id: String
     var name: String
+    var subtypes: [DocumentSubTypeDomainModel]
 }
 
 // MARK: ListItem implementation
