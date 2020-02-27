@@ -30,9 +30,8 @@ class NewDocumentTypeViewModel {
     
     private(set) lazy var documentTypes: [FormField] = {
         var documentTypes: [DocumentTypeDomainModel] {
-            return database.loadObjects(DocumentTypeDatabaseModel.self)
-                .map({ $0.toDomainModel() })
-                .sorted(by: { $0.name < $1.name })
+               return database.loadObjects(DocumentTypeDatabaseModel.self)
+                   .map({ $0.toDomainModel() })
         }
         
         var fields: [ListPickerField<DocumentSubTypeDomainModel>] = []
