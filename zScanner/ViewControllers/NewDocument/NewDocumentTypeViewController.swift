@@ -136,7 +136,6 @@ extension NewDocumentTypeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            print(indexPath.row)
             let item = viewModel.fields[indexPath.row]
             
             switch item {
@@ -169,31 +168,39 @@ extension NewDocumentTypeViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate implementation
 extension NewDocumentTypeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = viewModel.documentTypes[indexPath.row]
-        
-        // Hide picker if user select different cell
-        if self.pickerIndexPath != nil && !(item is DateTimePickerField) {
-            self.hideDateTimePicker()
-        }
-        
-        // Remove focus from textField is user select different cell
-        tableView.visibleCells.forEach({ ($0 as? TextInputTableViewCell)?.enableSelection() })
-        
-        switch item {
-        case let list as ListPickerField<DocumentSubTypeDomainModel>:
+        if indexPath.section == 0 {
+            let item = viewModel.fields[indexPath.row]
+            
+            // Hide picker if user select different cell
+            if self.pickerIndexPath != nil && !(item is DateTimePickerField) {
+                self.hideDateTimePicker()
+            }
+            
+            // Remove focus from textField is user select different cell
+            tableView.visibleCells.forEach({ ($0 as? TextInputTableViewCell)?.enableSelection() })
+            
+            switch item {
+            case let list as ListPickerField<DocumentSubTypeDomainModel>:
+                coordinator.showSelector(for: list)
+            case let date as DateTimePickerField:
+                if pickerIndexPath == nil {
+                    showDateTimePicker(for: indexPath, date: date)
+                } else {
+                    hideDateTimePicker()
+                }
+            case is TextInputField:
+                if let cell = tableView.cellForRow(at: indexPath) as? TextInputTableViewCell {
+                    cell.enableTextEdit()
+                }
+            default:
+                break
+            }
+            
+        } else {
+            let item = viewModel.documentTypes[indexPath.row]
+                
+            let list = item as! ListPickerField<DocumentSubTypeDomainModel>
             coordinator.showSelector(for: list)
-        case let date as DateTimePickerField:
-            if pickerIndexPath == nil {
-                showDateTimePicker(for: indexPath, date: date)
-            } else {
-                hideDateTimePicker()
-            }
-        case is TextInputField:
-            if let cell = tableView.cellForRow(at: indexPath) as? TextInputTableViewCell {
-                cell.enableTextEdit()
-            }
-        default:
-            break
         }
     }
 }
